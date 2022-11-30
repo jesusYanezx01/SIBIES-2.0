@@ -18,6 +18,5 @@ public class App {
         Controlador controlador = new Controlador(jflogin);
         controlador.inicio();
         
-        jflogin.setVisible(true);
     }
 }

@@ -1,21 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.sibies.Vistas;
 
-/**
- *
- * @author Jesus
- */
+import com.mycompany.sibies.DAO.DaoAdministrador;
+import com.mycompany.sibies.Modelos.Administrador;
+import javax.swing.JOptionPane;
+
+
 public class Jflogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Jflogin
-     */
+   
     public Jflogin() {
         initComponents();
+        setLocationRelativeTo(null);
+        txtadvertencia.setVisible(false);
+
     }
 
     /**
@@ -27,22 +25,105 @@ public class Jflogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Btingresar = new javax.swing.JButton();
+        txtcontraseña = new javax.swing.JPasswordField();
+        txtusuario = new javax.swing.JTextField();
+        txtadvertencia = new javax.swing.JLabel();
+        fondoLogin = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Usuario: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 315, -1, -1));
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Contraseña:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 383, -1, -1));
+
+        Btingresar.setBackground(new java.awt.Color(204, 204, 204));
+        Btingresar.setForeground(new java.awt.Color(0, 0, 0));
+        Btingresar.setText("INGRESAR");
+        Btingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtingresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, -1, -1));
+
+        txtcontraseña.setBackground(new java.awt.Color(255, 255, 255));
+        txtcontraseña.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(txtcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 167, -1));
+
+        txtusuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 167, -1));
+
+        txtadvertencia.setForeground(new java.awt.Color(255, 0, 0));
+        txtadvertencia.setText("Usuario incorrecto, verifique sus datos");
+        jPanel1.add(txtadvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, -1, -1));
+
+        fondoLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trina\\Downloads\\login SIBIES.jpg")); // NOI18N
+        jPanel1.add(fondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 550, 678));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
+
+    private void BtingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtingresarActionPerformed
+        //BOTON PARA INGRESAR DE LOGIN A PANEL DE CONTROL
+        
+        DaoAdministrador daoAdministrador = new DaoAdministrador();
+        JfpanelControl jfpanel = new JfpanelControl();
+
+        String user = txtusuario.getText();
+        String pass = txtcontraseña.getText();
+        
+        if (user.equals("") || pass.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese los datos completos");
+
+        } else {
+
+            if (daoAdministrador.ingresar(user, pass)) {
+
+                jfpanel.setVisible(true);
+                this.dispose();
+
+            } else {
+                txtadvertencia.setVisible(true);
+                limpiar();
+            
+            }
+        }               
+    }//GEN-LAST:event_BtingresarActionPerformed
+ 
+     private void limpiar (){
+        txtusuario.setText("");
+        txtcontraseña.setText("");
+       } 
     /**
      * @param args the command line arguments
      */
@@ -79,5 +160,13 @@ public class Jflogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton Btingresar;
+    private javax.swing.JLabel fondoLogin;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel txtadvertencia;
+    public javax.swing.JPasswordField txtcontraseña;
+    public javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
